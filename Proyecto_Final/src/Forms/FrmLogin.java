@@ -27,6 +27,7 @@ public class FrmLogin extends javax.swing.JFrame {
   
     public FrmLogin() {
         initComponents();
+        
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setTitle("Solucione Tecnologicas");
@@ -71,11 +72,11 @@ public class FrmLogin extends javax.swing.JFrame {
                     if ((User.equals(usuario)) && (pass.equals(clave))) {
                         JOptionPane.showMessageDialog(null, "BIENVENIDO");
                         FrmHome ventana = new FrmHome();
-                        //ventana.datos(datos[3], cifrado.decifrar(datos[0])); //cifrado.decifrar(user)
+                        ventana.recibir(datos[4],cifrado.decifrar(datos[0]),cifrado.decifrar(datos[1]),datos[5],datos[3]);
                         ventana.setVisible(true);
                         dispose();
                     }
-                   
+                  
                     contenido = lector.readLine();
 
                 } catch (Exception e) {

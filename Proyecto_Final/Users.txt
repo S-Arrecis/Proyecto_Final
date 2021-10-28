@@ -1,5 +1,5 @@
 St5v5n,¡22534s,h967,001,Gerente,bombi.png
 j9b,j72,h967,002,Engargado,carro.png
-867dys,¡y767,#$%,005,Engargado,pexels-daniel-xavier-1239291.jpg
-M7239s,P7z,&/(,006,Encargado,Ejercicio 6.jpeg
-K70467,81t45225z,#$%,007,Gerente,kamila.jpg
+867dys,¡y767,h967,005,Engargado,pexels-daniel-xavier-1239291.jpg
+M7239s,P7z,h967,006,Encargado,Ejercicio 6.jpeg
+K70467,81t45225z,h967,007,Gerente,kamila.jpg
