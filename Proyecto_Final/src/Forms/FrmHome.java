@@ -1,8 +1,10 @@
 
 package Forms;
 
+import java.awt.Desktop;
 import java.awt.Image;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -48,6 +50,9 @@ public class FrmHome extends javax.swing.JFrame {
         botonEmpleados = new javax.swing.JButton();
         botonClientes = new javax.swing.JButton();
         botonRegistrar = new javax.swing.JButton();
+        botonBici = new javax.swing.JButton();
+        botonEntrega = new javax.swing.JButton();
+        botonBici1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -102,6 +107,11 @@ public class FrmHome extends javax.swing.JFrame {
 
         PuntoA.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         PuntoA.setText("Punto   \"A\"");
+        PuntoA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PuntoAActionPerformed(evt);
+            }
+        });
 
         PuntoB.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         PuntoB.setText("Punto  \"B\"");
@@ -150,28 +160,63 @@ public class FrmHome extends javax.swing.JFrame {
             }
         });
 
+        botonBici.setText("Bicicletas");
+        botonBici.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBiciActionPerformed(evt);
+            }
+        });
+
+        botonEntrega.setText("Entregas");
+        botonEntrega.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEntregaActionPerformed(evt);
+            }
+        });
+
+        botonBici1.setText("Devoluciones");
+        botonBici1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBici1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelGernteLayout = new javax.swing.GroupLayout(PanelGernte);
         PanelGernte.setLayout(PanelGernteLayout);
         PanelGernteLayout.setHorizontalGroup(
             PanelGernteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelGernteLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(botonEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botonClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botonRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(PanelGernteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelGernteLayout.createSequentialGroup()
+                        .addComponent(botonEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botonClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botonRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 5, Short.MAX_VALUE))
+                    .addGroup(PanelGernteLayout.createSequentialGroup()
+                        .addComponent(botonBici, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botonEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botonBici1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         PanelGernteLayout.setVerticalGroup(
             PanelGernteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelGernteLayout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+            .addGroup(PanelGernteLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(PanelGernteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(PanelGernteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonBici1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonBici, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
@@ -199,8 +244,8 @@ public class FrmHome extends javax.swing.JFrame {
                 .addComponent(PanelEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PanelPuntos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                .addComponent(PanelGernte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(PanelGernte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -234,8 +279,10 @@ public class FrmHome extends javax.swing.JFrame {
     }
     public void validar(String Dato){
         if(Dato.equals("Engargado")){
-            this.PanelGernte.setVisible(false);
+            //this.PanelGernte.setVisible(false);
             this.botonEmpleados.setEnabled(false);
+            this.botonClientes.setEnabled(false);
+            this.botonRegistrar.setEnabled(false);
         }
         
     }
@@ -255,7 +302,7 @@ public class FrmHome extends javax.swing.JFrame {
                    System.out.println(cifrado.decifrar(datos[0]));
                     System.out.println(cifrado.decifrar(datos[1]));
                     System.out.println(cifrado.decifrar(datos[2]));
-                   String temp= nombre+" "+apellido+" Cargo: "+Dato;
+                   String temp= nombre+" "+apellido;
                     pdf.CrearPdfEmpleado(datos[3],cifrado.decifrar(datos[0]),cifrado.decifrar(datos[1]),cifrado.decifrar(datos[4]),datos[5],temp);
                     contenido ="";
                     contenido = lector.readLine();
@@ -276,6 +323,7 @@ public class FrmHome extends javax.swing.JFrame {
     
     private void botonEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEmpleadosActionPerformed
         traducir();
+        abrirarchivo("Empleados.pdf");
     }//GEN-LAST:event_botonEmpleadosActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -296,7 +344,36 @@ public class FrmHome extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_botonRegistrarActionPerformed
 
-   
+    private void PuntoAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PuntoAActionPerformed
+        Elegir ventana = new Elegir();
+        ventana.recibir(nombre, apellido, codigo,Dato,foto);
+        ventana.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_PuntoAActionPerformed
+
+    private void botonEntregaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEntregaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonEntregaActionPerformed
+
+    private void botonBici1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBici1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonBici1ActionPerformed
+
+    private void botonBiciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBiciActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonBiciActionPerformed
+
+     public void abrirarchivo(String archivo){
+        try {
+
+           File objetofile = new File (archivo);
+           Desktop.getDesktop().open(objetofile);
+
+        }catch (IOException ex) {
+            JOptionPane.showMessageDialog(null,"Error al abrir el documento "+ex);
+        }
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -335,8 +412,11 @@ public class FrmHome extends javax.swing.JFrame {
     private javax.swing.JPanel PanelPuntos;
     private javax.swing.JButton PuntoA;
     private javax.swing.JButton PuntoB;
+    public javax.swing.JButton botonBici;
+    public javax.swing.JButton botonBici1;
     public javax.swing.JButton botonClientes;
     public javax.swing.JButton botonEmpleados;
+    public javax.swing.JButton botonEntrega;
     public javax.swing.JButton botonRegistrar;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel mostrarD;

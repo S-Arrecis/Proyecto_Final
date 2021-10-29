@@ -37,6 +37,8 @@ public class FrmLogin extends javax.swing.JFrame {
                 cambiarImagen();
             }
         });
+        
+       
     }
 
     public void setLogoUser(ImageIcon LogoUser) {
