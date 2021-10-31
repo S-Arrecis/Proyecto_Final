@@ -115,6 +115,11 @@ public class FrmHome extends javax.swing.JFrame {
 
         PuntoB.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         PuntoB.setText("Punto  \"B\"");
+        PuntoB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PuntoBActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelPuntosLayout = new javax.swing.GroupLayout(PanelPuntos);
         PanelPuntos.setLayout(PanelPuntosLayout);
@@ -287,7 +292,7 @@ public class FrmHome extends javax.swing.JFrame {
         
     }
     
-    public void traducir(){
+    public void traducirEmpleado(){
         String contenido, clave, user;
         String Pass = "";
         pdf.iniciarEmpleado();
@@ -319,10 +324,141 @@ public class FrmHome extends javax.swing.JFrame {
         }
         JOptionPane.showMessageDialog(null,"Se genero el reporte");
     }
-
     
+      public void traducirCliente(){
+        String contenido, clave, user;
+        String Pass = "";
+        pdf.iniciarEmpleado();
+        try {
+            FileReader lectura = new FileReader("Cliente.txt");
+            BufferedReader lector = new BufferedReader(lectura);
+            contenido = lector.readLine();
+            while (contenido != null) {
+                try {
+
+                   datos = contenido.split(",");
+                   
+                   String temp= nombre+" "+apellido;
+                    pdf.CrearPdfClientes(cifrado.decifrar(datos[0]),cifrado.decifrar(datos[1]),cifrado.decifrar(datos[2]),cifrado.decifrar(datos[3]),temp);
+                    //pdf.CrearPdfClientes(codigo, nombre, apellido, foto, apellido);
+                    contenido ="";
+                    contenido = lector.readLine();
+
+                } catch (Exception e) {
+                    System.out.println("Error. " + e);
+                }
+            }
+
+        } catch (FileNotFoundException ex) {
+            System.out.println("erro> " + ex);
+        } catch (IOException ex) {
+            System.out.println("erro> " + ex);
+        }
+        JOptionPane.showMessageDialog(null,"Se genero el reporte");
+    }
+    
+    public void traducirBiciA(){
+        String contenido, clave, user;
+        String Pass = "";
+        pdf.iniciarEmpleado();
+        try {
+            FileReader lectura = new FileReader("BicicletasPA.txt");
+            BufferedReader lector = new BufferedReader(lectura);
+            contenido = lector.readLine();
+            while (contenido != null) {
+                try {
+
+                   //datos = contenido.split(",");
+                   
+                   //String temp= nombre+" "+apellido;
+                    //pdf.CrearPdfClientes(cifrado.decifrar(datos[0]),cifrado.decifrar(datos[1]),cifrado.decifrar(datos[2]),cifrado.decifrar(datos[3]),temp);
+                    //pdf.CrearPdfClientes(codigo, nombre, apellido, foto, apellido);
+                    pdf.CrearPdfBici("WAKANDA"+contenido,"A","M136-1-500x333 (1).png",nombre+" "+this.apellido);
+                    contenido ="";
+                    contenido = lector.readLine();
+
+                } catch (Exception e) {
+                    System.out.println("Error. " + e);
+                }
+            }
+
+        } catch (FileNotFoundException ex) {
+            System.out.println("erro> " + ex);
+        } catch (IOException ex) {
+            System.out.println("erro> " + ex);
+        }
+        //JOptionPane.showMessageDialog(null,"Se genero el reporte");
+    }  
+    
+     public void traducirBiciB(){
+        String contenido, clave, user;
+        String Pass = "";
+        pdf.iniciarEmpleado();
+        try {
+            FileReader lectura = new FileReader("BicicletasPB.txt");
+            BufferedReader lector = new BufferedReader(lectura);
+            contenido = lector.readLine();
+            while (contenido != null) {
+                try {
+
+                   //datos = contenido.split(",");
+                   
+                   //String temp= nombre+" "+apellido;
+                    //pdf.CrearPdfClientes(cifrado.decifrar(datos[0]),cifrado.decifrar(datos[1]),cifrado.decifrar(datos[2]),cifrado.decifrar(datos[3]),temp);
+                    //pdf.CrearPdfClientes(codigo, nombre, apellido, foto, apellido);
+                    pdf.CrearPdfBici("WAKANDA"+contenido,"B","M136-1-500x333 (1).png",nombre+" "+this.apellido);
+                    contenido ="";
+                    contenido = lector.readLine();
+
+                } catch (Exception e) {
+                    System.out.println("Error. " + e);
+                }
+            }
+
+        } catch (FileNotFoundException ex) {
+            System.out.println("erro> " + ex);
+        } catch (IOException ex) {
+            System.out.println("erro> " + ex);
+        }
+        JOptionPane.showMessageDialog(null,"Se genero el reporte");
+    } 
+    
+     public void traducirEntrega(){
+        String contenido, clave, user;
+        String Pass = "";
+        pdf.iniciarEmpleado();
+        try {
+            FileReader lectura = new FileReader("Entrega.txt");
+            BufferedReader lector = new BufferedReader(lectura);
+            contenido = lector.readLine();
+            while (contenido != null) {
+                try {
+
+                    datos = contenido.split(",");
+                   
+                   //String temp= nombre+" "+apellido;
+                    //pdf.CrearPdfClientes(cifrado.decifrar(datos[0]),cifrado.decifrar(datos[1]),cifrado.decifrar(datos[2]),cifrado.decifrar(datos[3]),temp);
+                    //pdf.CrearPdfClientes(codigo, nombre, apellido, foto, apellido);
+                    //pdf.CrearPdfBici("WAKANDA"+contenido,"B","M136-1-500x333 (1).png",nombre+" "+this.apellido);
+                    pdf.CrearEntrega(cifrado.decifrar(datos[0]),cifrado.decifrar(datos[1]), cifrado.decifrar(datos[2]),cifrado.decifrar(datos[3]),cifrado.decifrar(datos[4]),cifrado.decifrar(datos[5]),cifrado.decifrar(datos[6]),cifrado.decifrar(datos[7]));
+                    contenido ="";
+                    contenido = lector.readLine();
+
+                } catch (Exception e) {
+                    System.out.println("Error. " + e);
+                }
+            }
+
+        } catch (FileNotFoundException ex) {
+            System.out.println("erro> " + ex);
+        } catch (IOException ex) {
+            System.out.println("erro> " + ex);
+        }
+        JOptionPane.showMessageDialog(null,"Se genero el reporte");
+    } 
+     
     private void botonEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEmpleadosActionPerformed
-        traducir();
+        traducirEmpleado();
         abrirarchivo("Empleados.pdf");
     }//GEN-LAST:event_botonEmpleadosActionPerformed
 
@@ -334,7 +470,9 @@ public class FrmHome extends javax.swing.JFrame {
 
     private void botonClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonClientesActionPerformed
         pdf.iniciarClientes();
-        pdf.CrearPdfClientes("3032618490106","Matilde Leonara","Gonzalez Paz","17779808","kamila.jpg","Steven Arrecis");
+        traducirCliente();
+        abrirarchivo("Clientes.pdf");
+        //pdf.CrearPdfClientes("3032618490106","Matilde Leonara","Gonzalez Paz","17779808","kamila.jpg","Steven Arrecis");
     }//GEN-LAST:event_botonClientesActionPerformed
 
     private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
@@ -346,13 +484,15 @@ public class FrmHome extends javax.swing.JFrame {
 
     private void PuntoAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PuntoAActionPerformed
         Elegir ventana = new Elegir();
-        ventana.recibir(nombre, apellido, codigo,Dato,foto);
+        ventana.recibir(nombre, apellido, codigo,Dato,foto,"A",1);
         ventana.setVisible(true);
         dispose();
     }//GEN-LAST:event_PuntoAActionPerformed
 
     private void botonEntregaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEntregaActionPerformed
-        // TODO add your handling code here:
+        pdf.iniciarEntrega();
+        traducirEntrega();
+        abrirarchivo("Entrega.pdf");
     }//GEN-LAST:event_botonEntregaActionPerformed
 
     private void botonBici1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBici1ActionPerformed
@@ -360,8 +500,18 @@ public class FrmHome extends javax.swing.JFrame {
     }//GEN-LAST:event_botonBici1ActionPerformed
 
     private void botonBiciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBiciActionPerformed
-        // TODO add your handling code here:
+        pdf.inicarBici();
+        traducirBiciA();
+        traducirBiciB();
+        abrirarchivo("Bicicletas.pdf");
     }//GEN-LAST:event_botonBiciActionPerformed
+
+    private void PuntoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PuntoBActionPerformed
+        Elegir ventana = new Elegir();
+        ventana.recibir(nombre, apellido, codigo,Dato,foto,"B",2);
+        ventana.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_PuntoBActionPerformed
 
      public void abrirarchivo(String archivo){
         try {

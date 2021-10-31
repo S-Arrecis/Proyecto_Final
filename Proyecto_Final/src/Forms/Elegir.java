@@ -1,13 +1,17 @@
 
 package Forms;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Arrecis
  */
 public class Elegir extends javax.swing.JFrame {
 
-   private String nombre,apellido,codigo,puesto,foto;
+   private String nombre,apellido,codigo,puesto,foto,punto;
+   private int numero;
+   private Bicicletas NuevaBici = new Bicicletas();
     public Elegir() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -108,17 +112,22 @@ public class Elegir extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         FormularioDeEntrega ventana = new FormularioDeEntrega();
-        ventana.GetDatos(nombre, apellido, codigo, puesto, "WAKANDA01", foto, "A");
+        NuevaBici.punto(numero);
+        String temp=NuevaBici.AsignarBici();
+        JOptionPane.showMessageDialog(null,"Se asignara la Bicicleta Serie: WAKANDA"+temp);
+        ventana.GetDatos(nombre, apellido, codigo, puesto, "WAKANDA"+temp, foto, punto,numero);
         ventana.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
     
-    public void recibir(String nombre,String apellido,String codigo,String puesto,String foto){
+    public void recibir(String nombre,String apellido,String codigo,String puesto,String foto,String punto,int numero){
         this.nombre = nombre;
         this.apellido = apellido;
         this.codigo = codigo;
         this.foto = foto;
         this.puesto = puesto;
+        this.punto = punto;
+        this.numero = numero;
     }
    
     public static void main(String args[]) {

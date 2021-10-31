@@ -10,6 +10,7 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -28,6 +29,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import net.glxn.qrgen.QRCode;
 import net.glxn.qrgen.image.ImageType;
@@ -40,17 +42,18 @@ import net.glxn.qrgen.image.ImageType;
 public class FormularioDeEntrega extends javax.swing.JFrame {
 
     private String Nombres,Apellidos,CodigoEmpleado,PuestoEmpleado,SerieBicicleta,FotoUsuario,Punto;
-    private String NombreCliente,DPICliente,TelCliente,DireccionCliente,FotoCliente=null,NoFormulario;
+    private String NombreCliente,DPICliente,TelCliente,DireccionCliente,FotoCliente=null,NoFormulario,TIEMPO;
+    private Bicicletas NuevaBici = new Bicicletas();
 
+    private GenerarArchivos doc = new GenerarArchivos();
     
-    
-      private final ImageIcon logo = new ImageIcon("umg.png");
+   private final ImageIcon logo = new ImageIcon("umg.png");
    private JFileChooser buscar = new JFileChooser();
    private Path origenPath,destinoPath;
    private FileNameExtensionFilter filtro = new FileNameExtensionFilter("JPEG/PNG","jpeg","png","jpg");
    private ImageIcon user = new ImageIcon("user.png");
    private String NombreArchivo,Ruta;
-
+   private int numero;
     
     public FormularioDeEntrega() {
         initComponents();
@@ -62,7 +65,7 @@ public class FormularioDeEntrega extends javax.swing.JFrame {
         //GetDatos("1","2","3","4","5","user.png","B");
     }
   
-  public void GetDatos(String Nombres,String Apellidos,String CodigoEmpleado,String PuestoEmpleado,String SerieBicicleta,String FotoUsuario,String Punto){
+  public void GetDatos(String Nombres,String Apellidos,String CodigoEmpleado,String PuestoEmpleado,String SerieBicicleta,String FotoUsuario,String Punto,int numero){
 
 this.Nombres=Nombres;
 this.Apellidos=Apellidos;
@@ -71,6 +74,7 @@ this.PuestoEmpleado =PuestoEmpleado;
 this.SerieBicicleta=SerieBicicleta;
 this.FotoUsuario=FotoUsuario;
 this.Punto=Punto;
+this.numero = numero;
 
 
 ImageIcon ImagenFotoUsuario = new ImageIcon(this.FotoUsuario);
@@ -163,7 +167,16 @@ this.NoFormulario=this.jLabel21.getText();
     }     
      
      
-     
+      public void abrirarchivo(String archivo) {
+        try {
+
+            File objetofile = new File(archivo);
+            Desktop.getDesktop().open(objetofile);
+
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Error al abrir el documento " + ex);
+        }
+    }
      
      
     
@@ -220,7 +233,7 @@ this.NoFormulario=this.jLabel21.getText();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Formulario de entrega de bicicletas");
-        getContentPane().setLayout(new java.awt.GridLayout());
+        getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
@@ -449,6 +462,11 @@ this.NoFormulario=this.jLabel21.getText();
         jTextField11.setEditable(false);
         jTextField11.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         jTextField11.setEnabled(false);
+        jTextField11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField11ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -639,8 +657,28 @@ this.NoFormulario=this.jLabel21.getText();
     }//GEN-LAST:event_jTextField8ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-         GenerarQR();
+        TIEMPO=this.jLabel22.getText();
+        GenerarQR();
          setDatos();
+        NuevaBici.punto(numero);
+        NuevaBici.AsignarBici();
+        NuevaBici.ActualizarBicicletas();
+        
+        doc.CrearCliente(DPICliente, NombreCliente,TelCliente,NombreArchivo);
+        doc.CrearEntrega(NoFormulario,Punto,this.Nombres+" "+this.Apellidos, CodigoEmpleado, NombreCliente,TelCliente,SerieBicicleta ,NombreArchivo);
+        doc.CrearEntregaT(NoFormulario, Punto,"QR/"+NoFormulario+".png", Nombres+" "+Apellidos, CodigoEmpleado,NombreCliente,DPICliente,TelCliente,DireccionCliente,NombreArchivo,SerieBicicleta,"M136-1-500x333 (1).png");
+        Pdf u = new Pdf();
+        JOptionPane.showMessageDialog(null,"Codigo> "+NoFormulario);
+        u.GenerarFormularioEntrega(TIEMPO,NoFormulario,Punto,NoFormulario,this.Nombres+" "+this.Apellidos,CodigoEmpleado,NombreCliente,DPICliente,TelCliente,DireccionCliente,NombreArchivo,SerieBicicleta,"M136-1-500x333 (1).png");
+        
+        JOptionPane.showMessageDialog(null,"Generado con éxito!!");
+        abrirarchivo("FormularioEnvio.pdf");
+        JOptionPane.showMessageDialog(null,"Regresando al menu HOME!!");
+        FrmHome vetana = new FrmHome();
+        vetana.recibir(PuestoEmpleado, Nombres, Apellidos, FotoUsuario, CodigoEmpleado);
+        vetana.setVisible(true);
+        dispose();
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -686,6 +724,10 @@ this.NoFormulario=this.jLabel21.getText();
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField7ActionPerformed
 
+    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField11ActionPerformed
+
  
         public void setUser(ImageIcon user) {
         this.user = user;
@@ -701,7 +743,9 @@ this.NoFormulario=this.jLabel21.getText();
             Logger.getLogger(FormularioDeEntrega.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        
+         
+
+   
         
         }
         
