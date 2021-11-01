@@ -30,7 +30,7 @@ public class Pdf {
     private PdfPTable tablaCliente = new PdfPTable(4);
     private PdfPTable tablaEntrega = new PdfPTable(8);
     private PdfPTable tablaRecibo = new PdfPTable(5);
-    private PdfPTable tablaBici = new PdfPTable(3);
+    private PdfPTable tablaBici = new PdfPTable(2);
     
     public void iniciarEmpleado(){
        
@@ -44,7 +44,7 @@ public class Pdf {
     public void inicarBici(){
         tablaBici.addCell("Punto");
         tablaBici.addCell("Serie");
-        tablaBici.addCell("Fotografia");
+        //tablaBici.addCell("Fotografia");
         
     }
     public void iniciarClientes(){
@@ -304,7 +304,7 @@ public class Pdf {
             
             tablaBici.addCell(punto);
             tablaBici.addCell(codigo);
-            tablaBici.addCell(Foto);
+            //tablaBici.addCell(Foto);
             documento.add(tablaBici);
             
             documento.close();

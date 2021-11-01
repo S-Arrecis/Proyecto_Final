@@ -5,7 +5,10 @@
  */
 package Forms;
 
+import java.awt.Desktop;
 import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.ImageIcon;
@@ -30,16 +33,36 @@ public class FormularioDeRecepcion extends javax.swing.JFrame {
    return now.toString();
 
 }
- 
-public void GetDatos(String nombre,String codigo,String puesto, String foto,String punto,int pt){
+ String Nombres,Apellidos,CodigoEmpleado,PuestoEmpleado,FotoUsuario;
+  public void GetD(String Nombres,String Apellidos,String CodigoEmpleado,String PuestoEmpleado,String FotoUsuario){
+
+this.Nombres=Nombres;
+this.Apellidos=Apellidos;
+this.CodigoEmpleado=CodigoEmpleado;
+this.PuestoEmpleado =PuestoEmpleado;      
+this.FotoUsuario=FotoUsuario;
+
+ }
+public void GetDatos(String nombre,String codigo,String puesto, String foto,String punto,int pt,String nombreCliente,String celularCliente,String dpiCliente,String direccionCliente,String fotoCliente,String serieBici,String noFormulario){
     this.jTextField2.setText(nombre);
     this.jTextField3.setText(codigo);
     this.jTextField4.setText(puesto);
+    this.jTextField5.setText(nombreCliente);
+    this.jTextField6.setText(dpiCliente);
+    this.jTextField7.setText(direccionCliente);
+    this.jTextField8.setText(celularCliente);
+    this.jTextField16.setText("WAKANDA"+serieBici);
+    this.jLabel23.setText(punto);
+    this.jLabel14.setText("Número de Formulario: "+String.valueOf(noFormulario));
     this.pt=pt;
-  
+    this.Serie = serieBici;
  ImageIcon ImagenFotoUsuario = new ImageIcon(foto);
  this.jLabel4.setIcon((new ImageIcon(ImagenFotoUsuario.getImage().getScaledInstance(jLabel4.getWidth(),jLabel4.getHeight(),Image.SCALE_SMOOTH ))));
 
+ ImageIcon ImagenFotoCliente = new ImageIcon(fotoCliente);
+ this.jLabel1.setIcon((new ImageIcon(ImagenFotoCliente.getImage().getScaledInstance(jLabel1.getWidth(),jLabel1.getHeight(),Image.SCALE_SMOOTH ))));
+ 
+ 
  }
 
 
@@ -102,10 +125,8 @@ public void GetDatos(String nombre,String codigo,String puesto, String foto,Stri
         jButton4 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel26 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
 
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
@@ -412,23 +433,11 @@ public void GetDatos(String nombre,String codigo,String puesto, String foto,Stri
         jLabel26.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         jLabel26.setText("Hora y Fecha:");
 
-        jButton1.setBackground(new java.awt.Color(0, 102, 102));
-        jButton1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-        jButton1.setText("INGRESAR NUMERO DE FORMULARIO");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jPanel6.setBackground(new java.awt.Color(0, 153, 153));
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "Datos del formulario de entrega", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("sansserif", 1, 14))); // NOI18N
 
         jLabel14.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         jLabel14.setText("Número de Formulario:");
-
-        jLabel27.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jLabel27.setText("Fecha y Hora de la Entrega: ");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -437,17 +446,13 @@ public void GetDatos(String nombre,String codigo,String puesto, String foto,Stri
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(12, 12, 12))
+                .addContainerGap(391, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -470,8 +475,7 @@ public void GetDatos(String nombre,String codigo,String puesto, String foto,Stri
                         .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -488,10 +492,8 @@ public void GetDatos(String nombre,String codigo,String puesto, String foto,Stri
                         .addComponent(jLabel24))
                     .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel26)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel26)
+                .addGap(23, 23, 23)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -537,11 +539,22 @@ public void GetDatos(String nombre,String codigo,String puesto, String foto,Stri
      Bicicletas bc = new Bicicletas();
      bc.punto(pt);     
      bc.EntregarBicileta(Serie); 
+     
+        JOptionPane.showMessageDialog(null,"Generado con éxito!!");
+        abrirarchivo("FormularioEnvio.pdf");
+        JOptionPane.showMessageDialog(null,"Regresando al menu HOME!!");
+        FrmHome vetana = new FrmHome();
+        vetana.recibir(PuestoEmpleado, Nombres, Apellidos, FotoUsuario,CodigoEmpleado);
+        vetana.setVisible(true);
+        dispose();
    
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+        FrmHome vetana = new FrmHome();
+        vetana.recibir(PuestoEmpleado, Nombres, Apellidos, FotoUsuario,CodigoEmpleado);
+        vetana.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -551,13 +564,17 @@ public void GetDatos(String nombre,String codigo,String puesto, String foto,Stri
     private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField5ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      NoFormulario = JOptionPane.showInputDialog(this,"Ecaneé el QR o ingrese el número manualmente: ");
-     this.jLabel14.setText("Número de Formulario:"+String.valueOf(NoFormulario));
     
-    }//GEN-LAST:event_jButton1ActionPerformed
+    public void abrirarchivo(String archivo) {
+        try {
 
+            File objetofile = new File(archivo);
+            Desktop.getDesktop().open(objetofile);
+
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Error al abrir el documento " + ex);
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -594,20 +611,14 @@ public void GetDatos(String nombre,String codigo,String puesto, String foto,Stri
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -615,7 +626,6 @@ public void GetDatos(String nombre,String codigo,String puesto, String foto,Stri
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
@@ -625,13 +635,9 @@ public void GetDatos(String nombre,String codigo,String puesto, String foto,Stri
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField15;
@@ -643,6 +649,5 @@ public void GetDatos(String nombre,String codigo,String puesto, String foto,Stri
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
 }

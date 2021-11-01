@@ -84,7 +84,7 @@ ImageIcon ImagenFotoUsuario = new ImageIcon(this.FotoUsuario);
 this.jTextField1.setText(this.Nombres+" "+this.Apellidos);
 this.jTextField2.setText(this.CodigoEmpleado);
 this.jTextField3.setText(this.PuestoEmpleado);
-this.jTextField11.setText(this.SerieBicicleta);
+this.jTextField11.setText("WAKANDA"+this.SerieBicicleta);
 this.jLabel23.setText(this.Punto);
 }  
  
@@ -666,7 +666,7 @@ this.NoFormulario=this.jLabel21.getText();
         
         doc.CrearCliente(DPICliente, NombreCliente,TelCliente,NombreArchivo);
         doc.CrearEntrega(NoFormulario,Punto,this.Nombres+" "+this.Apellidos, CodigoEmpleado, NombreCliente,TelCliente,SerieBicicleta ,NombreArchivo);
-        doc.CrearEntregaT(NoFormulario, Punto,"QR/"+NoFormulario+".png", Nombres+" "+Apellidos, CodigoEmpleado,NombreCliente,DPICliente,TelCliente,DireccionCliente,NombreArchivo,SerieBicicleta,"M136-1-500x333 (1).png");
+        doc.CrearEntregaT(NoFormulario, Punto, Nombres+" "+Apellidos, CodigoEmpleado,NombreCliente,DPICliente,TelCliente,DireccionCliente,NombreArchivo,SerieBicicleta);
         Pdf u = new Pdf();
         JOptionPane.showMessageDialog(null,"Codigo> "+NoFormulario);
         u.GenerarFormularioEntrega(TIEMPO,NoFormulario,Punto,NoFormulario,this.Nombres+" "+this.Apellidos,CodigoEmpleado,NombreCliente,DPICliente,TelCliente,DireccionCliente,NombreArchivo,SerieBicicleta,"M136-1-500x333 (1).png");

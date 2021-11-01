@@ -73,10 +73,9 @@ public class GenerarArchivos {
     
     }
     
-    public void CrearEntregaT(String codigo,String punto, String fotoQR, String nombreEmpleado, String codigoEmpleado, String nombre, String dpi, String numero, String direccion, String foto, String serie, String fotoBici) {
+    public void CrearEntregaT(String codigo,String punto, String nombreEmpleado, String codigoEmpleado, String nombre, String dpi, String numero, String direccion, String foto, String serie) {
         this.codigo = cifrar.cifrar(codigo);
         this.punto = cifrar.cifrar(punto);
-        this.fotoQR=cifrar.cifrar(fotoQR);
         this.nombreEmpleado = cifrar.cifrar(nombreEmpleado);
         this.codigoEmpleado = cifrar.cifrar(codigoEmpleado);
         this.nombre = cifrar.cifrar(nombre);
@@ -85,15 +84,14 @@ public class GenerarArchivos {
         this.direccion = cifrar.cifrar(direccion);
         this.foto = cifrar.cifrar(foto);
         this.serie = cifrar.cifrar(serie);
-        this.fotoBici = cifrar.cifrar(fotoBici);
-        
+          
         FileWriter escribir = null;
         String temp="";
        try {
            Documento = new File("EntregaT.txt");
            escribir = new FileWriter(Documento,true);
            
-           temp = this.codigo+","+this.punto+","+this.fotoQR+","+this.nombreEmpleado+","+this.codigoEmpleado+","+this.nombre+","+this.dpi+","+this.numero+","+this.direccion+","+this.foto+","+this.serie+","+this.fotoBici;
+           temp = this.codigo+","+this.punto+","+this.nombreEmpleado+","+this.codigoEmpleado+","+this.nombre+","+this.dpi+","+this.numero+","+this.direccion+","+this.foto+","+this.serie;
            escribir.write(temp);
            escribir.write("\r\n");           
            escribir.close();
