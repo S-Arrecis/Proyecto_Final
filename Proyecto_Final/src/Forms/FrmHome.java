@@ -388,6 +388,7 @@ public class FrmHome extends javax.swing.JFrame {
             System.out.println("erro> " + ex);
         }
         //JOptionPane.showMessageDialog(null,"Se genero el reporte");
+        pdf.inicarBici();
     }  
     
      public void traducirBiciB(){
@@ -456,7 +457,40 @@ public class FrmHome extends javax.swing.JFrame {
         }
         JOptionPane.showMessageDialog(null,"Se genero el reporte");
     } 
-     
+ 
+          public void traducirRecibo(){
+        String contenido, clave, user;
+        String Pass = "";
+        pdf.iniciarEmpleado();
+        try {
+            FileReader lectura = new FileReader("Recibo.txt");
+            BufferedReader lector = new BufferedReader(lectura);
+            contenido = lector.readLine();
+            while (contenido != null) {
+                try {
+
+                    datos = contenido.split(",");
+                   
+                   //String temp= nombre+" "+apellido;
+                    //pdf.CrearPdfClientes(cifrado.decifrar(datos[0]),cifrado.decifrar(datos[1]),cifrado.decifrar(datos[2]),cifrado.decifrar(datos[3]),temp);
+                    //pdf.CrearPdfClientes(codigo, nombre, apellido, foto, apellido);
+                    //pdf.CrearPdfBici("WAKANDA"+contenido,"B","M136-1-500x333 (1).png",nombre+" "+this.apellido);
+                    pdf.CrearRecibo(datos[0],datos[1],datos[2],datos[3],datos[4],datos[5],datos[6],datos[7]);
+                    contenido ="";
+                    contenido = lector.readLine();
+
+                } catch (Exception e) {
+                    System.out.println("Error. " + e);
+                }
+            }
+
+        } catch (FileNotFoundException ex) {
+            System.out.println("erro> " + ex);
+        } catch (IOException ex) {
+            System.out.println("erro> " + ex);
+        }
+        JOptionPane.showMessageDialog(null,"Se genero el reporte");
+    }
     private void botonEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEmpleadosActionPerformed
         traducirEmpleado();
         abrirarchivo("Empleados.pdf");
@@ -496,7 +530,9 @@ public class FrmHome extends javax.swing.JFrame {
     }//GEN-LAST:event_botonEntregaActionPerformed
 
     private void botonBici1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBici1ActionPerformed
-        // TODO add your handling code here:
+        pdf.iniciarRecibo();
+        traducirRecibo();
+        abrirarchivo("Recibo.pdf");
     }//GEN-LAST:event_botonBici1ActionPerformed
 
     private void botonBiciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBiciActionPerformed

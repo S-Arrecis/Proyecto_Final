@@ -19,9 +19,14 @@ import javax.swing.JOptionPane;
  * @author Lennyn
  */
 public class FormularioDeRecepcion extends javax.swing.JFrame {
-  String NoFormulario,Serie; 
-  int pt;
-    public FormularioDeRecepcion() {
+  private String NoFormulario,Serie,nombreCliente; 
+  private int pt;
+  private Pdf pdf=new Pdf();
+  ImageIcon ImagenFotoCliente;
+  String fotoC,PUNTOC;
+  GenerarArchivos archivo = new GenerarArchivos();
+    
+  public FormularioDeRecepcion() {
         initComponents();    
         ObtenerTiempo();    
         setLocationRelativeTo(null);
@@ -55,11 +60,15 @@ public void GetDatos(String nombre,String codigo,String puesto, String foto,Stri
     this.jLabel23.setText(punto);
     this.jLabel14.setText("Número de Formulario: "+String.valueOf(noFormulario));
     this.pt=pt;
+    this.NoFormulario = noFormulario;
     this.Serie = serieBici;
+    this.fotoC=fotoCliente;
+    this.PUNTOC =punto;
+    this.nombreCliente=nombreCliente;
  ImageIcon ImagenFotoUsuario = new ImageIcon(foto);
  this.jLabel4.setIcon((new ImageIcon(ImagenFotoUsuario.getImage().getScaledInstance(jLabel4.getWidth(),jLabel4.getHeight(),Image.SCALE_SMOOTH ))));
-
- ImageIcon ImagenFotoCliente = new ImageIcon(fotoCliente);
+ ImagenFotoCliente = new ImageIcon(fotoCliente);
+ 
  this.jLabel1.setIcon((new ImageIcon(ImagenFotoCliente.getImage().getScaledInstance(jLabel1.getWidth(),jLabel1.getHeight(),Image.SCALE_SMOOTH ))));
  
  
@@ -535,13 +544,14 @@ public void GetDatos(String nombre,String codigo,String puesto, String foto,Stri
     }//GEN-LAST:event_jTextField14ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-
+      String  TIEMPO=this.jLabel26.getText();
      Bicicletas bc = new Bicicletas();
      bc.punto(pt);     
      bc.EntregarBicileta(Serie); 
-     
+        pdf.GenerarFormularioRecibo(TIEMPO,NoFormulario,PUNTOC,jTextField2.getText(),jTextField3.getText(),nombreCliente,jTextField6.getText(),jTextField8.getText(),jTextField7.getText(),fotoC,jTextField16.getText(),"M136-1-500x333 (1).png");
+        archivo.CrearRecibo(NoFormulario, PUNTOC, jTextField2.getText(), jTextField3.getText(), nombreCliente,jTextField8.getText() , fotoC, Serie);
         JOptionPane.showMessageDialog(null,"Generado con éxito!!");
-        abrirarchivo("FormularioEnvio.pdf");
+        abrirarchivo("FormularioRecibo.pdf");
         JOptionPane.showMessageDialog(null,"Regresando al menu HOME!!");
         FrmHome vetana = new FrmHome();
         vetana.recibir(PuestoEmpleado, Nombres, Apellidos, FotoUsuario,CodigoEmpleado);

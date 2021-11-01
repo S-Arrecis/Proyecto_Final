@@ -103,19 +103,19 @@ public class GenerarArchivos {
     
     }
     
-     public void CrearRecibo(String codigo,String punto, String fotoQR, String nombreEmpleado, String codigoEmpleado, String nombre, String dpi, String numero, String direccion, String foto, String serie, String fotoBici) {
-        this.codigo = codigo;
-        this.punto = punto;
-        this.fotoQR=fotoQR;
-        this.nombreEmpleado = nombreEmpleado;
-        this.codigoEmpleado = codigoEmpleado;
-        this.nombre = nombre;
-        this.dpi = dpi;
-        this.numero=numero;
-        this.direccion = direccion;
-        this.foto = foto;
-        this.serie = serie;
-        this.fotoBici = fotoBici;
+     public void CrearRecibo(String codigo,String punto, String nombreEmpleado, String codigoEmpleado, String nombre, String numero, String foto, String serie) {
+        this.codigo = (codigo);
+        this.punto = (punto);
+        
+        this.nombreEmpleado = (nombreEmpleado);
+        this.codigoEmpleado = (codigoEmpleado);
+        this.nombre = (nombre);
+        
+        this.numero=(numero);
+        
+        this.foto = (foto);
+        this.serie = (serie);
+        
         
         FileWriter escribir = null;
         String temp="";
@@ -123,7 +123,7 @@ public class GenerarArchivos {
            Documento = new File("Recibo.txt");
            escribir = new FileWriter(Documento,true);
            
-           temp = codigo+","+punto+","+fotoQR+","+nombreEmpleado+","+codigoEmpleado+","+nombre+","+dpi+","+numero+","+direccion+","+foto+","+serie+","+fotoBici;
+           temp = this.codigo+","+this.punto+","+this.nombreEmpleado+","+this.codigoEmpleado+","+this.nombre+","+this.numero+","+this.foto+","+this.serie;
            escribir.write(temp);
            escribir.write("\r\n");           
            escribir.close();
