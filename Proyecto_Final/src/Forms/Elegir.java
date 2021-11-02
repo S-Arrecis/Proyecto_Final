@@ -116,7 +116,7 @@ public class Elegir extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         FrmHome ventana = new FrmHome();
-        ventana.recibir(nombre, apellido,puesto, foto, Codigo);
+        ventana.recibir(puesto, nombre,apellido, foto, Codigo);
         ventana.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
