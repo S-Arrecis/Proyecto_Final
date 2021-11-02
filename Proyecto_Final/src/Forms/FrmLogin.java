@@ -24,6 +24,7 @@ public class FrmLogin extends javax.swing.JFrame {
      private String[] datos= null;
      Cifrado cifrado = new Cifrado();
      private final File texto = new File("Users.txt");
+     private boolean entra=false;
   
     public FrmLogin() {
         initComponents();
@@ -73,6 +74,7 @@ public class FrmLogin extends javax.swing.JFrame {
 
                     if ((User.equals(usuario)) && (pass.equals(clave))) {
                         JOptionPane.showMessageDialog(null, "BIENVENIDO");
+                        entra=true;
                         FrmHome ventana = new FrmHome();
                         ventana.recibir(datos[4],cifrado.decifrar(datos[0]),cifrado.decifrar(datos[1]),datos[5],datos[3]);
                         ventana.setVisible(true);
@@ -98,6 +100,9 @@ public class FrmLogin extends javax.swing.JFrame {
             System.out.println("erro> " + ex);
         } catch (IOException ex) {
             System.out.println("erro> " + ex);
+        }
+        if(entra==false){
+            JOptionPane.showMessageDialog(null,"Usurio o Contraseña incorrectos");
         }
     }
 

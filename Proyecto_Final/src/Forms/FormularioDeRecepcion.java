@@ -552,7 +552,7 @@ public void GetDatos(String nombre,String codigo,String puesto, String foto,Stri
         archivo.CrearRecibo(NoFormulario, PUNTOC, jTextField2.getText(), jTextField3.getText(), nombreCliente,jTextField8.getText() , fotoC, Serie);
         JOptionPane.showMessageDialog(null,"Generado con éxito!!");
         abrirarchivo("FormularioRecibo.pdf");
-        JOptionPane.showMessageDialog(null,"Regresando al menu HOME!!");
+        JOptionPane.showMessageDialog(null,"Regresando al menu Principal!!");
         FrmHome vetana = new FrmHome();
         vetana.recibir(PuestoEmpleado, Nombres, Apellidos, FotoUsuario,CodigoEmpleado);
         vetana.setVisible(true);

@@ -673,7 +673,7 @@ this.NoFormulario=this.jLabel21.getText();
         
         JOptionPane.showMessageDialog(null,"Generado con éxito!!");
         abrirarchivo("FormularioEnvio.pdf");
-        JOptionPane.showMessageDialog(null,"Regresando al menu HOME!!");
+        JOptionPane.showMessageDialog(null,"Regresando al menu Principal!!");
         FrmHome vetana = new FrmHome();
         vetana.recibir(PuestoEmpleado, Nombres, Apellidos, FotoUsuario, CodigoEmpleado);
         vetana.setVisible(true);
