@@ -1,1 +1,2 @@
 211101193111,B,lennyn rodriguez,002,Maria lourdes Paz,77889900,cliente.jpg,001
+211101210528,A,Steven Arrecis,001,Mario Perez,456847856,mario.jpeg,026
